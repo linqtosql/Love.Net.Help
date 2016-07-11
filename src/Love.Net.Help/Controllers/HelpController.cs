@@ -9,12 +9,14 @@ using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json.Linq;
 
 namespace Love.Net.Help.Controllers {
     /// <summary>
     /// Represents the help controller to generate API documentation.
     /// </summary>
+    [AllowAnonymous]
     [Route("api/[controller]")]
     public class HelpController {
         private readonly IApiDescriptionGroupCollectionProvider _provider;

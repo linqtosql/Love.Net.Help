@@ -29,7 +29,7 @@ namespace Microsoft.Extensions.DependencyInjection {
             }
             else {
                 builder.Services.Configure<ApiHelpOptions>(options => {
-                    options.LoadingPolicy = LoadingPolicy.Lazy;
+                    options.LoadingPolicy = LoadingPolicy.Eager;
                 });
             }
 

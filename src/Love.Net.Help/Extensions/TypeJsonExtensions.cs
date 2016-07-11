@@ -17,7 +17,7 @@ namespace Love.Net.Help {
 
             var typeInfo = type.GetTypeInfo();
             if (typeInfo.IsEnum || type.IsPrimitive()) {
-                return JToken.FromObject(type.GetDefaultValue());
+                return JToken.FromObject(type.GetDefaultValue() ?? type.Name);
             }
             else if (typeInfo.IsGenericType) {
                 var array = new JArray();
