@@ -27,8 +27,9 @@ namespace Love.Net.Help.Host
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public UserKind Post([FromBody]UserCreateModel user)
         {
+            return UserKind.FromTest;
         }
 
         // PUT api/values/5
@@ -42,5 +43,35 @@ namespace Love.Net.Help.Host
         public void Delete(int id)
         {
         }
+    }
+
+    public enum UserKind {
+        /// <summary>
+        /// From API
+        /// </summary>
+        FromApi,
+        /// <summary>
+        /// From web
+        /// </summary>
+        FromWeb,
+        /// <summary>
+        /// From test
+        /// </summary>
+        FromTest,
+    }
+
+    public class UserCreateModel {
+        /// <summary>
+        /// 用户名.
+        /// </summary>
+        public string UserName { get; set; }
+        /// <summary>
+        /// 密码.
+        /// </summary>
+        public string Password { get; set; }
+        /// <summary>
+        /// 类型.
+        /// </summary>
+        public UserKind UserKind { get; set; }
     }
 }
