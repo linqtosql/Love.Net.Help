@@ -38,7 +38,7 @@ namespace Love.Net.Help {
                 properties = properties.Where(p => !excludeProperties.Contains(p.Name));
             }
             foreach (var prop in properties) {
-                var propertyType = prop.PropertyType;
+                var propertyType = prop.PropertyType.UnwrapNullableType();
                 if (propertyType.IsPrimitive()) {
                     var defaultValue = JToken.FromObject(propertyType.GetDefaultValue() ?? prop.XmlDoc() ?? prop.Name);
                     json.Add(prop.Name, defaultValue);
