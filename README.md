@@ -6,11 +6,11 @@ A generate API documentation toolchain for ASP.NET Core.
 
 # How to use
 
-1. Install package
+## Install package
 
 `PM> Install-Package Love.Net.Help`
 
-2. Configure Services
+## Configure Services
 
 Add API help to services `services.AddMvcCore().AddApiHelp()`
 
@@ -26,7 +26,7 @@ Add API help to services `services.AddMvcCore().AddApiHelp()`
 
 ```
 
-3. Use *POSTMAN* to view the generated API
+## Use *POSTMAN* to view the generated API
 
 GET *http://yourdomain/api/help*
 
@@ -117,12 +117,12 @@ GET *http://yourdomain/api/help*
     }
 ```
 
-4. About UI
+# About UI
 
 The currently impls doesn't include the UI, so if your team need an UI to improve the usage, you can use *angularjs* to do that, AND *wellcome to contribute* here. We will thank
 your work.
 
-5. What's the different with others
+# What's the different with others
 
 There are many API help libaries, but I cann't found any library give the *Enum* define, and what's mean of the field. *Love.Net.Help* have this func
 
