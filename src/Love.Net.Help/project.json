@@ -1,0 +1,46 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "The generate API documentation infrastructure for Asp.Net Core - a API toolchain for ASP.NET Core.",
+  "packOptions": {
+    "licenseUrl": "https://github.com/lovedotnet/Love.Net.Help/LICENSE",
+    "owners": [
+      "rigofunc",
+      "rigofunc@outlook.com"
+    ],
+    "projectUrl": "https://github.com/lovedotnet/Love.Net.Help",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/lovedotnet/Love.Net.Help.git"
+    },
+    "summary": "The generate API documentation infrastructure for Asp.Net Core - a API toolchain for ASP.NET Core.",
+    "tags": [
+      "documentation",
+      "discovery",
+      "help",
+      "webapi",
+      "aspnet",
+      "aspnetcore"
+    ]
+  },
+  "buildOptions": {
+    "optimize": true,
+    "nowarn": [
+      "CS1591"
+    ],
+    "xmlDoc": true,
+    "warningsAsErrors": true
+  },
+  "dependencies": {
+    "NETStandard.Library": "1.6.0",
+    "Microsoft.AspNetCore.Mvc.Core": "1.0.0",
+    "Microsoft.AspNetCore.Mvc.ApiExplorer": "1.0.0",
+    "System.Xml.XPath.XDocument": "4.0.1",
+    "System.Reflection.TypeExtensions": "4.1.0",
+    "Newtonsoft.Json": "9.0.1"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+    }
+  }
+}
