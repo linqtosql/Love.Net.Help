@@ -1,8 +1,6 @@
 # Love.Net.Help
 
-A generate API documentation toolchain for ASP.NET Core.
-
-[![Join the chat at https://gitter.im/lovedotnet/Love.Net.Help](https://badges.gitter.im/lovedotnet/Love.Net.Help.svg)](https://gitter.im/lovedotnet/Love.Net.Help?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
+A generate API documentation toolchain for ASP.NET Core. [![Join the chat at https://gitter.im/lovedotnet/Love.Net.Help](https://badges.gitter.im/lovedotnet/Love.Net.Help.svg)](https://gitter.im/lovedotnet/Love.Net.Help?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 
 # Overview
 
@@ -32,9 +30,9 @@ Add API help to services `services.AddMvcCore().AddApiHelp()`
 
 ```
 
-## Use *POSTMAN* to view the generated API
+## Use *Postman* or had installed `JSON-handle` extension Chrome to view the generated API
 
-GET *http://yourdomain/api/help*
+GET `http://localhost:10571/api/help`
 
 ```JSON
     "POST api/Account/Register": {
@@ -42,7 +40,7 @@ GET *http://yourdomain/api/help*
       "Request": {
         "model": {
           "Source": "Body",
-          "Data": {
+          "Scaffold": {
             "UserName": {
               "Summary": "用户名.",
               "Type": "String",
@@ -73,7 +71,7 @@ GET *http://yourdomain/api/help*
         }
       },
       "Response": {
-        "Data": {
+        "Scaffold": {
           "AccessToken": {
             "Summary": "Gets the access token.",
             "Type": "String",
@@ -172,7 +170,7 @@ There are many API help libaries, but I cann't found any library give the *Enum*
       "Request": {
         "user": {
           "Source": "Body",
-          "Data": {
+          "Scaffold": {
             "UserName": {
               "Summary": "用户名.",
               "Type": "String",
@@ -201,7 +199,7 @@ There are many API help libaries, but I cann't found any library give the *Enum*
         }
       },
       "Response": {
-        "Data": {
+        "Scaffold": {
           "Summary": {
             "0": "From API",
             "1": "From web",
