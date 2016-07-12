@@ -4,6 +4,12 @@ A generate API documentation toolchain for ASP.NET Core.
 
 [![Join the chat at https://gitter.im/lovedotnet/Love.Net.Help](https://badges.gitter.im/lovedotnet/Love.Net.Help.svg)](https://gitter.im/lovedotnet/Love.Net.Help?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 
+# Overview
+
+If your Chrom install `JSON-handle` extension, visit `http://yourdomain/api/help`, the result will be
+
+![Love.Net.Help Overview](images/JSON-handle.PNG)
+
 # How to use
 
 ## Install package
