@@ -33,9 +33,9 @@ namespace Love.Net.Help {
             }
 
             var json = new JObject();
-            var properties = typeInfo.DeclaredProperties;
+            var properties = typeInfo.GetProperties();
             if (excludeProperties != null && excludeProperties.Length > 0) {
-                properties = properties.Where(p => !excludeProperties.Contains(p.Name));
+                properties = properties.Where(p => !excludeProperties.Contains(p.Name)).ToArray();
             }
             foreach (var prop in properties) {
                 var propertyType = prop.PropertyType.UnwrapNullableType();
