@@ -6,7 +6,7 @@ A generate API documentation toolchain for ASP.NET Core.
 
 # Overview
 
-If your Chrom install `JSON-handle` extension, visit `http://yourdomain/api/help`, the result will be
+If your Chrome had installed `JSON-handle` extension, visit `http://localhost:10571/api/help`, the result will be
 
 ![Love.Net.Help Overview](images/JSON-handle.PNG)
 
