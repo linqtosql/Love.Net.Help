@@ -36,11 +36,8 @@ namespace Love.Net.Help.Controllers {
         public JObject Get() {
             var json = new JObject();
 
-            // all group
-            var groupCollection = _provider.ApiDescriptionGroups.Items;
-
             // each group
-            foreach (var group in groupCollection) {
+            foreach (var group in _provider.ApiDescriptionGroups.Items) {
                 json.Add(group.GroupName, Handle(group));
             }
 
@@ -80,6 +77,8 @@ namespace Love.Net.Help.Controllers {
             var json = new JObject();
 
             json.Add("Summary", GetActionSummary(item.ActionDescriptor));
+            json.Add("HttpMethod", item.HttpMethod);
+            json.Add("RelativePath", item.RelativePath);
             json.Add("Request", HandleRequest(item));
             json.Add("Response", HandleResponse(item));
 
@@ -113,21 +112,21 @@ namespace Love.Net.Help.Controllers {
             }
             
             var json = new JObject();
-            json.Add("Data", type.Scaffold());
+            json.Add("Scaffold", type.Scaffold());
             json.Add("Schema", type.Schema());
 
             return json;
         }
 
-        private static JToken HandlerParameter(ApiParameterDescription parameter) {
+        private JToken HandlerParameter(ApiParameterDescription parameter) {
             var json = new JObject();
 
             json.Add("Source", parameter.Source.Id);
             if (parameter.Type.IsPrimitive()) {
-                json.Add("Data", parameter.Type.Scaffold());
+                json.Add("Scaffold", parameter.Type.Scaffold());
             }
             else {
-                json.Add("Data", parameter.Type.Scaffold());
+                json.Add("Scaffold", parameter.Type.Scaffold());
                 json.Add("Schema", parameter.Type.Schema());
             }
 

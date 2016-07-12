@@ -1,6 +1,7 @@
 ﻿{
   "version": "1.0.0-*",
   "description": "The generate API documentation infrastructure for Asp.Net Core - a API toolchain for ASP.NET Core.",
+  "authors": [ "rigofunc", "rigofunc@outlook.com", "xuyingting" ],
   "packOptions": {
     "licenseUrl": "https://github.com/lovedotnet/Love.Net.Help/LICENSE",
     "owners": [
