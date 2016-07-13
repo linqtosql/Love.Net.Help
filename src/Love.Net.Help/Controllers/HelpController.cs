@@ -93,7 +93,7 @@ namespace Love.Net.Help.Controllers {
         private JToken Handle(ApiDescription item) {
             var json = new JObject();
 
-            json.Add("Summary", GetActionSummary(item.ActionDescriptor));
+            json.Add("Summary", item.GetSummary());
             json.Add("HttpMethod", item.HttpMethod);
             json.Add("RelativePath", item.RelativePath);
             json.Add("Request", HandleRequest(item));
@@ -106,7 +106,7 @@ namespace Love.Net.Help.Controllers {
             var json = new JObject();
 
             if(item.SupportedRequestFormats.Count > 0) {
-                json.Add("MediaType", new JArray(item.SupportedRequestMediaTypes()));
+                json.Add("SupportedMediaType", new JArray(item.SupportedRequestMediaTypes()));
             }
 
             foreach (var parameter in item.ParameterDescriptions.Where(p => p.Source.IsFromRequest)) {
@@ -136,7 +136,7 @@ namespace Love.Net.Help.Controllers {
             var json = new JObject();
 
             if(item.SupportedResponseTypes?.Count > 0) {
-                json.Add("MediaType", new JArray(item.SupportedResponseMediaTypes()));
+                json.Add("SupportedMediaType", new JArray(item.SupportedResponseMediaTypes()));
             }
 
             json.Add("Scaffold", type.Scaffold());
@@ -159,17 +159,7 @@ namespace Love.Net.Help.Controllers {
 
             return json;
         }
-
-        private static string GetActionSummary(ActionDescriptor action) {
-            if(action is ControllerActionDescriptor) {
-                var controllerAtion = action as ControllerActionDescriptor;
-                return controllerAtion.MethodInfo.XmlDoc();
-            }
-            else {
-                return action.DisplayName;
-            }
-        }
-
+        
         private static Type GetDeclaredReturnType(ControllerActionDescriptor action) {
             var declaredReturnType = action.MethodInfo.ReturnType;
             if (declaredReturnType == typeof(void) ||

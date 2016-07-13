@@ -28,6 +28,13 @@ namespace Love.Net.Help {
                 : Enumerable.Empty<Attribute>();
         }
 
+        internal static string GetSummary(this ApiDescription apiDescription) {
+            var actionDescriptor = apiDescription.ActionDescriptor as ControllerActionDescriptor;
+            return (actionDescriptor != null)
+                ? actionDescriptor.MethodInfo.XmlDoc()
+                : apiDescription.ActionDescriptor.DisplayName;
+        }
+
         internal static bool IsObsolete(this ApiDescription apiDescription) {
             return apiDescription.GetActionAttributes().OfType<ObsoleteAttribute>().Any();
         }
