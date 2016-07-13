@@ -29,6 +29,7 @@ namespace Microsoft.Extensions.DependencyInjection {
             }
             else {
                 builder.Services.Configure<ApiHelpOptions>(options => {
+                    options.IgnoreObsoleteApi = true;
                     options.LoadingPolicy = LoadingPolicy.Eager;
                 });
             }

@@ -46,7 +46,18 @@ namespace Love.Net.Help.Controllers {
 
         [HttpGet("[action]")]
         public JObject Get([FromQuery]ApiInputModel model) {
-            var items = _provider.ApiDescriptionGroups.Items.SelectMany(group => group.Items.Where(it => it.RelativePath == model.RelativePath && (model.HttpMethod == null ? true : it.HttpMethod == model.HttpMethod)));
+            var items = _provider.ApiDescriptionGroups.Items
+                .SelectMany(group => group.Items.Where(it => 
+                    it.RelativePath.Equals(model.RelativePath, StringComparison.OrdinalIgnoreCase) 
+                    && 
+                    (model.HttpMethod == null ? true : it.HttpMethod.Equals(model.HttpMethod, StringComparison.OrdinalIgnoreCase))
+                 ));
+
+            // Remove the obsolete
+            if (_options.IgnoreObsoleteApi) {
+                items = items.Where(item => !item.IsObsolete());
+            }
+
             var json = new JObject();
             foreach (var item in items) {
                 json.Add($"{item.HttpMethod} {item.RelativePath}", Handle(item));
@@ -56,16 +67,22 @@ namespace Love.Net.Help.Controllers {
         }
 
         private JToken Handle(ApiDescriptionGroup group) {
-            if(_options.LoadingPolicy == LoadingPolicy.Lazy) {
+            var items = group.Items.AsEnumerable();
+            // Remove the obsolete
+            if (_options.IgnoreObsoleteApi) {
+                items = items.Where(item => !item.IsObsolete());
+            }
+
+            if (_options.LoadingPolicy == LoadingPolicy.Lazy) {
                 var array = new JArray();
-                foreach (var item in group.Items) {
+                foreach (var item in items) {
                     array.Add($"{item.HttpMethod} {item.RelativePath}");
                 }
                 return array;
             }
             else {
                 var json = new JObject();
-                foreach (var item in group.Items) {
+                foreach (var item in items) {
                     json.Add($"{item.HttpMethod} {item.RelativePath}", Handle(item));
                 }
 
@@ -87,6 +104,11 @@ namespace Love.Net.Help.Controllers {
 
         private JToken HandleRequest(ApiDescription item) {
             var json = new JObject();
+
+            if(item.SupportedRequestFormats.Count > 0) {
+                json.Add("MediaType", new JArray(item.SupportedRequestMediaTypes()));
+            }
+
             foreach (var parameter in item.ParameterDescriptions.Where(p => p.Source.IsFromRequest)) {
                 json.Add(parameter.Name, HandlerParameter(parameter));
             }
@@ -112,6 +134,11 @@ namespace Love.Net.Help.Controllers {
             }
             
             var json = new JObject();
+
+            if(item.SupportedResponseTypes?.Count > 0) {
+                json.Add("MediaType", new JArray(item.SupportedResponseMediaTypes()));
+            }
+
             json.Add("Scaffold", type.Scaffold());
             json.Add("Schema", type.Schema());
 
