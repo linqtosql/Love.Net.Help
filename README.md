@@ -34,91 +34,26 @@ Add API help to services `services.AddMvcCore().AddApiHelp()`
 
 GET `http://localhost:10571/api/help`
 
-```JSON
-    "POST api/Account/Register": {
-      "Summary": "",
-      "Request": {
-        "model": {
-          "Source": "Body",
-          "Scaffold": {
-            "UserName": {
-              "Summary": "用户名.",
-              "Type": "String",
-              "IsOptional": false
-            },
-            "Password": {
-              "Summary": "密码.",
-              "Type": "String",
-              "IsOptional": false
-            },
-            "PhoneNumber": {
-              "Summary": "电话号码.",
-              "Type": "String",
-              "IsOptional": false
-            },
-            "Code": {
-              "Summary": "验证码.",
-              "Type": "String",
-              "IsOptional": false
-            }
-          },
-          "Schema": {
-            "UserName": "用户名.",
-            "Password": "密码.",
-            "PhoneNumber": "电话号码.",
-            "Code": "验证码."
-          }
+## Options for API help
+
+```C#
+        public void ConfigureServices(IServiceCollection services) {
+            services.AddMvcCore()
+                .AddJsonFormatters(options => {
+                    options.ContractResolver = new DefaultContractResolver();
+                }).AddApiHelp(options => {
+                    options.IgnoreObsoleteApi = true;
+                    options.LoadingPolicy = LoadingPolicy.Lazy;
+                });
+
+            services.UseDefaultAccountService<User>(null);
         }
-      },
-      "Response": {
-        "Scaffold": {
-          "AccessToken": {
-            "Summary": "Gets the access token.",
-            "Type": "String",
-            "IsOptional": false
-          },
-          "ExpiresIn": {
-            "Summary": "Gets the expires in.",
-            "Type": "Int64",
-            "IsOptional": false
-          },
-          "Raw": {
-            "Summary": "Gets the raw.",
-            "Type": "String",
-            "IsOptional": false
-          },
-          "RefreshToken": {
-            "Summary": "Gets the refresh token.",
-            "Type": "String",
-            "IsOptional": false
-          },
-          "TokenType": {
-            "Summary": "Gets the type of the token.",
-            "Type": "String",
-            "IsOptional": false
-          },
-          "IsError": {
-            "Summary": "Gets a value indicating whether this instance is error.",
-            "Type": "Boolean",
-            "IsOptional": false
-          },
-          "Error": {
-            "Summary": "Gets the error.",
-            "Type": "String",
-            "IsOptional": false
-          }
-        },
-        "Schema": {
-          "AccessToken": "Gets the access token.",
-          "ExpiresIn": 0,
-          "Raw": "Gets the raw.",
-          "RefreshToken": "Gets the refresh token.",
-          "TokenType": "Gets the type of the token.",
-          "IsError": false,
-          "Error": "Gets the error."
-        }
-      }
-    }
+```
+
+## Loading specified API help
+
+```
+http://localhost:10571/api/help/get?RelativePath=api/Values/{id}&HttpMethod=GET
 ```
 
 # About UI
@@ -128,7 +63,7 @@ your work.
 
 # What's the different with others
 
-There are many API help libaries, but I cann't found any library give the *Enum* define, and what's mean of the field. *Love.Net.Help* have this func
+There are many API help libaries, but I cann't found any library give the *Enum* define, and what's mean of the fieldis. *Love.Net.Help* have this func
 
 ```C#
     public enum UserKind {
