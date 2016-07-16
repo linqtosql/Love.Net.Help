@@ -50,7 +50,7 @@ namespace Love.Net.Help.Controllers {
                 .SelectMany(group => group.Items.Where(it => 
                     it.RelativePath.Equals(model.RelativePath, StringComparison.OrdinalIgnoreCase) 
                     && 
-                    (model.HttpMethod == null ? true : it.HttpMethod.Equals(model.HttpMethod, StringComparison.OrdinalIgnoreCase))
+                    (model.HttpMethod == null || it.HttpMethod.Equals(model.HttpMethod, StringComparison.OrdinalIgnoreCase))
                  ));
 
             // Remove the obsolete
