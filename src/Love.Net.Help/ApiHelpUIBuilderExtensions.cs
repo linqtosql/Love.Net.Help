@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Builder {
             options.EnableDefaultFiles = false;
             options.StaticFileOptions.ContentTypeProvider = new FileExtensionContentTypeProvider();
 
-            var embedFiles = typeof(ApiHelpUIBuilderExtensions).GetTypeInfo().Assembly.GetManifestResourceNames();
+            // Debug view the embed files
+            //var embedFiles = typeof(ApiHelpUIBuilderExtensions).GetTypeInfo().Assembly.GetManifestResourceNames();
 
             options.FileProvider = new EmbeddedFileProvider(typeof(ApiHelpUIBuilderExtensions).GetTypeInfo().Assembly, "Love.Net.Help.UI.dist");
 
