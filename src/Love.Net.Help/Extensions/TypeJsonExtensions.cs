@@ -19,7 +19,7 @@ namespace Love.Net.Help {
             if (typeInfo.IsEnum || type.IsPrimitive()) {
                 return JToken.FromObject(type.GetDefaultValue() ?? type.Name);
             }
-            else if (typeInfo.IsGenericType) {
+            else if (typeInfo.IsGenericType && type.IsCollectionType()) {
                 var array = new JArray();
                 var elementType = type.GenericTypeArguments[0];
                 if (elementType.IsPrimitive()) {
@@ -44,16 +44,21 @@ namespace Love.Net.Help {
                     json.Add(prop.Name, defaultValue);
                 }
                 else if (propertyType.GetTypeInfo().IsGenericType) {
-                    var array = new JArray();
-                    var elementType = propertyType.GenericTypeArguments[0];
-                    if (elementType.IsPrimitive()) {
-                        var defaultValue = JToken.FromObject(propertyType.GetDefaultValue() ?? prop.XmlDoc() ?? prop.Name);
-                        array.Add(defaultValue);
+                    if (propertyType.IsCollectionType()) {
+                        var array = new JArray();
+                        var elementType = propertyType.GenericTypeArguments[0];
+                        if (elementType.IsPrimitive()) {
+                            var defaultValue = JToken.FromObject(propertyType.GetDefaultValue() ?? prop.XmlDoc() ?? prop.Name);
+                            array.Add(defaultValue);
+                        }
+                        else {
+                            array.Add(elementType.Schema());
+                        }
+                        json.Add(prop.Name, array);
                     }
                     else {
-                        array.Add(elementType.Schema());
+                        json.Add(prop.Name, propertyType.Schema());
                     }
-                    json.Add(prop.Name, array);
                 }
                 else if (propertyType.GetTypeInfo().IsClass) {
                     json.Add(prop.Name, propertyType.Schema());
@@ -102,7 +107,7 @@ namespace Love.Net.Help {
                     return type.Name;
                 }
             }
-            else if (typeInfo.IsGenericType) {
+            else if (typeInfo.IsGenericType && type.IsCollectionType()) {
                 var array = new JArray();
                 var elementType = type.GenericTypeArguments[0];
                 if (elementType.IsPrimitive()) {
@@ -117,8 +122,8 @@ namespace Love.Net.Help {
 
             var properties = typeInfo.GetProperties();
             foreach (var prop in properties) {
-                var propJson = new JObject();
                 if (prop.PropertyType.IsPrimitive()) {
+                    var propJson = new JObject();
                     var propertyType = prop.PropertyType.UnwrapNullableType();
                     // Summary & type
                     if (propertyType.GetTypeInfo().IsEnum) {
@@ -138,46 +143,50 @@ namespace Love.Net.Help {
                     else {
                         propJson.Add("IsOptional", false);
                     }
+
+                    json.Add(prop.Name, propJson);
                 }
                 else if (prop.PropertyType.GetTypeInfo().IsGenericType) {
-                    var array = new JArray();
-                    var elementType = prop.PropertyType.GenericTypeArguments[0];
-                    if (elementType.IsPrimitive()) {
-                        var inner = new JObject();
+                    if (prop.PropertyType.IsCollectionType()) {
+                        var array = new JArray();
+                        var elementType = prop.PropertyType.GenericTypeArguments[0];
+                        if (elementType.IsPrimitive()) {
+                            var inner = new JObject();
+                            var unwrapType = elementType.UnwrapNullableType();
+                            // Summary & type
+                            if (unwrapType.GetTypeInfo().IsEnum) {
+                                inner.Add("Summary", unwrapType.GetEnumXDoc());
+                                inner.Add("Type", Enum.GetUnderlyingType(unwrapType).Name);
+                            }
+                            else {
+                                inner.Add("Summary", prop.XmlDoc() ?? prop.Name);
+                                inner.Add("Type", unwrapType.Name);
+                            }
 
-                        var unwrapType = elementType.UnwrapNullableType();
-                        // Summary & type
-                        if (unwrapType.GetTypeInfo().IsEnum) {
-                            inner.Add("Summary", unwrapType.GetEnumXDoc());
-                            propJson.Add("Type", Enum.GetUnderlyingType(unwrapType).Name);
+                            // Optional
+                            var isNullable = unwrapType != elementType;
+                            if (isNullable) {
+                                inner.Add("IsOptional", true);
+                            }
+                            else {
+                                inner.Add("IsOptional", false);
+                            }
+
+                            array.Add(inner);
                         }
                         else {
-                            inner.Add("Summary", prop.XmlDoc() ?? prop.Name);
-                            propJson.Add("Type", unwrapType.Name);
+                            array.Add(elementType.Scaffold());
                         }
 
-                        // Optional
-                        var isNullable = unwrapType != elementType;
-                        if (isNullable) {
-                            propJson.Add("IsOptional", true);
-                        }
-                        else {
-                            propJson.Add("IsOptional", false);
-                        }
-
-                        array.Add(inner);
+                        json.Add(prop.Name, array);
                     }
                     else {
-                        array.Add(elementType.Scaffold());
+                        json.Add(prop.Name, prop.PropertyType.Scaffold());
                     }
-
-                    propJson.Add(prop.Name, array);
                 }
                 else if (prop.PropertyType.GetTypeInfo().IsClass) {
-                    propJson.Add(prop.Name, prop.PropertyType.Scaffold());
+                    json.Add(prop.Name, prop.PropertyType.Scaffold());
                 }
-
-                json.Add(prop.Name, propJson);
             }
 
             return json;

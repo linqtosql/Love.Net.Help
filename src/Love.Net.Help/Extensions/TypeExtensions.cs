@@ -1,14 +1,18 @@
 ﻿// Copyright (c) rigofunc (xuyingting). All rights reserved.
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Collections;
 
 namespace Love.Net.Help {
     /// <summary>
     /// The extension methods for <see cref="Type"/>.
     /// </summary>
     public static class TypeExtensions {
+        public static bool IsCollectionType(this Type type) => (type.GetInterfaces().Any(t => t == typeof(IEnumerable)));
+
         public static bool IsNullableType(this Type type) {
             var typeInfo = type.GetTypeInfo();
 
