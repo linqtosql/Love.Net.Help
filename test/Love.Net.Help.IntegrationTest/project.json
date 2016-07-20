@@ -23,7 +23,10 @@
     "copyToOutput": {
       "include": [ "xunit.runner.json" ]
     },
-    "xmlDoc": true
+    "xmlDoc": true,
+    "nowarn": [
+      "CS1591"
+    ]
   },
   "testRunner": "xunit"
 }
