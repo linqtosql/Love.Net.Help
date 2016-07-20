@@ -6,7 +6,7 @@ using Microsoft.Extensions.FileProviders;
 namespace Microsoft.AspNetCore.Builder {
     public static class ApiHelpUIBuilderExtensions {
         public static IApplicationBuilder UseApiHelpUI(this IApplicationBuilder app, string baseRoute = "api/help/ui") {
-            baseRoute.Trim('/');
+            baseRoute = baseRoute.Trim('/');
             var indexPath = baseRoute + "/index.html";
 
             // Enable redirect from base path ton index path.
