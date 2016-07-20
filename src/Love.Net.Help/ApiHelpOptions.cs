@@ -3,6 +3,11 @@
 namespace Love.Net.Help {
     public class ApiHelpOptions {
         /// <summary>
+        /// Gets or sets a value indicating whether include supported media type.
+        /// </summary>
+        /// <value><c>true</c> if include supported media type; otherwise, <c>false</c>.</value>
+        public bool IncludeSupportedMediaType { get; set; }
+        /// <summary>
         /// Gets or sets the value indicating whether ignore obsolete API or not.
         /// </summary>
         /// <value>The value indicating whether ignore obsolete API or not.</value>

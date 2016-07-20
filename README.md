@@ -1,12 +1,18 @@
 # Love.Net.Help
 
-A generate API documentation toolchain for ASP.NET Core. [![Join the chat at https://gitter.im/lovedotnet/Love.Net.Help](https://badges.gitter.im/lovedotnet/Love.Net.Help.svg)](https://gitter.im/lovedotnet/Love.Net.Help?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
+A generate API documentation toolchain for ASP.NET Core. 
+
+[![Join the chat at https://gitter.im/lovedotnet/Love.Net.Help](https://badges.gitter.im/lovedotnet/Love.Net.Help.svg)](https://gitter.im/lovedotnet/Love.Net.Help?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 
 # Overview
 
-If your Chrome had installed `JSON-handle` extension, visit `http://localhost:10571/api/help`, the result will be
+If your Chrome had installed `JSON-handle` extension, visit `http://localhost:10571/api/help`, the result will be:
 
 ![Love.Net.Help Overview](images/JSON-handle.PNG)
+
+If had configure to use **Love.Net.Help** UI `app.UseApiHelpUI();`, visit `http://localhost:10571/api/help/ui`, the result will be:
+
+![Love.Net.Help UI Overview](images/UI.PNG)
 
 # How to use
 
@@ -30,9 +36,20 @@ Add API help to services `services.AddMvcCore().AddApiHelp()`
 
 ```
 
-## Use *Postman* or had installed `JSON-handle` extension Chrome to view the generated API
+## Use **Love.Net.Help** UI `app.UseApiHelpUI();`
 
-GET `http://localhost:10571/api/help`
+```C#
+public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory) {
+    loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+    loggerFactory.AddDebug();
+
+    app.UseApiHelpUI();
+
+    app.UseMvc();
+}
+```
+
+Browser `http://localhost:10571/api/help/ui`
 
 ## Options for API help
 
@@ -58,92 +75,5 @@ http://localhost:10571/api/help/get?RelativePath=api/Values/{id}&HttpMethod=GET
 
 # About UI
 
-The currently impls doesn't include the UI, so if your team need an UI to improve the usage, you can use *angularjs* to do that, AND *wellcome to contribute* here. We will thank
+The currently impls include a simple UI, so if your team need an UI to improve the usage, **wellcome to contribute** here. We will thank
 your work.
-
-# What's the different with others
-
-There are many API help libaries, but I cann't found any library give the *Enum* define, and what's mean of the fieldis. *Love.Net.Help* have this func
-
-```C#
-    public enum UserKind {
-        /// <summary>
-        /// From API
-        /// </summary>
-        FromApi,
-        /// <summary>
-        /// From web
-        /// </summary>
-        FromWeb,
-        /// <summary>
-        /// From test
-        /// </summary>
-        FromTest,
-    }
-
-    public class UserCreateModel {
-        /// <summary>
-        /// 用户名.
-        /// </summary>
-        public string UserName { get; set; }
-        /// <summary>
-        /// 密码.
-        /// </summary>
-        public string Password { get; set; }
-        /// <summary>
-        /// 类型.
-        /// </summary>
-        public UserKind UserKind { get; set; }
-    }
-```
-
-*Love.Net.Help* Will generate
-
-```JSON
-"POST api/Values": {
-      "Summary": "",
-      "Request": {
-        "user": {
-          "Source": "Body",
-          "Scaffold": {
-            "UserName": {
-              "Summary": "用户名.",
-              "Type": "String",
-              "IsOptional": false
-            },
-            "Password": {
-              "Summary": "密码.",
-              "Type": "String",
-              "IsOptional": false
-            },
-            "UserKind": {
-              "Summary": {
-                "0": "From API",
-                "1": "From web",
-                "2": "From test"
-              },
-              "Type": "Int32",
-              "IsOptional": false
-            }
-          },
-          "Schema": {
-            "UserName": "用户名.",
-            "Password": "密码.",
-            "UserKind": 0
-          }
-        }
-      },
-      "Response": {
-        "Scaffold": {
-          "Summary": {
-            "0": "From API",
-            "1": "From web",
-            "2": "From test"
-          },
-          "Type": "Int32",
-          "IsOptional": false
-        },
-        "Schema": 0
-      }
-    }
-```

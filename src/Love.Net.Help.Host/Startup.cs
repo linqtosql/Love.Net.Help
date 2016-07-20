@@ -35,6 +35,8 @@ namespace Love.Net.Help.Host {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            app.UseApiHelpUI();
+
             app.UseMvc();
         }
     }

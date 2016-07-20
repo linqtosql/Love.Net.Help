@@ -105,7 +105,7 @@ namespace Love.Net.Help.Controllers {
         private JToken HandleRequest(ApiDescription item) {
             var json = new JObject();
 
-            if(item.SupportedRequestFormats.Count > 0) {
+            if(_options.IncludeSupportedMediaType && item.SupportedRequestFormats.Count > 0) {
                 json.Add("SupportedMediaType", new JArray(item.SupportedRequestMediaTypes()));
             }
 
@@ -135,7 +135,7 @@ namespace Love.Net.Help.Controllers {
             
             var json = new JObject();
 
-            if(item.SupportedResponseTypes?.Count > 0) {
+            if(_options.IncludeSupportedMediaType && item.SupportedResponseTypes?.Count > 0) {
                 json.Add("SupportedMediaType", new JArray(item.SupportedResponseMediaTypes()));
             }
 

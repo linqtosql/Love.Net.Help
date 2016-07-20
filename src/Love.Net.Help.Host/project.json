@@ -15,7 +15,7 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "Microsoft.AspNetCore.Mvc.Formatters.Json": "1.0.0",
-    "RigoFunc.Account": "1.0.4",
+    "RigoFunc.Account": "1.0.7",
     "Love.Net.Help": "1.0.0-*"
   },
 
