@@ -42,6 +42,12 @@ namespace Love.Net.Help.UnitTest {
         public IList<TimeSpan> Items { get; set; }
     }
 
+    public enum Gender {
+        Unknown,
+        Male,
+        Female,
+    }
+
     public class TypeJsonExtensionsTest {
         [Fact]
         public void GenericType_Scaffold_Test() {
@@ -91,6 +97,14 @@ namespace Love.Net.Help.UnitTest {
             var expected = File.ReadAllText(".\\TimeSpan.json");
 
             Assert.Equal(expected, json.ToString());
+        }
+
+        [Fact]
+        public void Enum_Schema_Default_Value_Test() {
+            var type = typeof(Gender);
+            var json = type.Schema();
+
+            Assert.Equal(0, json);
         }
     }
 }
