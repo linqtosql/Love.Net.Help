@@ -5,8 +5,9 @@ A generate API documentation toolchain for ASP.NET Core.
 [![Join the chat at https://gitter.im/lovedotnet/Love.Net.Help](https://badges.gitter.im/lovedotnet/Love.Net.Help.svg)](https://gitter.im/lovedotnet/Love.Net.Help?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 
 # Features
-[x] Read XML comments at run time;
-[x] Get **Enum** raw constant value and XML comments;
+- [x] Read XML comments at run time;
+- [x] Get **Enum** raw constant value and XML comments;
+
     e.g.
     ```JSON
     {
@@ -15,7 +16,7 @@ A generate API documentation toolchain for ASP.NET Core.
       "2": "女性"
     }
     ```
-[x]  Generate API documentation for ASP.NET Core.
+- [x]  Generate API documentation for ASP.NET Core.
 
 # Overview
 
