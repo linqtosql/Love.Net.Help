@@ -34,7 +34,7 @@ namespace Love.Net.Help {
 
             var json = new JObject();
             var properties = typeInfo.GetProperties();
-            if (excludeProperties != null && excludeProperties.Length > 0) {
+            if (excludeProperties.Length > 0) {
                 properties = properties.Where(p => !excludeProperties.Contains(p.Name)).ToArray();
             }
             foreach (var prop in properties) {
@@ -48,7 +48,7 @@ namespace Love.Net.Help {
                         var array = new JArray();
                         var elementType = propertyType.GenericTypeArguments[0];
                         if (elementType.IsPrimitive()) {
-                            var defaultValue = JToken.FromObject(propertyType.GetDefaultValue() ?? prop.XmlDoc() ?? prop.Name);
+                            var defaultValue = JToken.FromObject(elementType.GetDefaultValue() ?? prop.XmlDoc() ?? prop.Name);
                             array.Add(defaultValue);
                         }
                         else {

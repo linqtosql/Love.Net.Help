@@ -74,33 +74,34 @@ namespace Love.Net.Help {
             return (type == typeof(bool))
                    || (type == typeof(byte[]))
                    || (type == typeof(DateTime))
+                   || (type == typeof(TimeSpan))
                    || (type == typeof(DateTimeOffset))
                    || (type == typeof(decimal))
                    || (type == typeof(double))
                    || (type == typeof(float))
                    || (type == typeof(Guid))
                    || (type == typeof(string))
-                   || (type == typeof(TimeSpan))
                    || type.GetTypeInfo().IsEnum;
         }
 
         private static readonly Dictionary<Type, object> _commonTypeDictionary = new Dictionary<Type, object>
         {
-            { typeof(int), default(int) },
             { typeof(Guid), default(Guid) },
+            { typeof(TimeSpan), default(TimeSpan) },
             { typeof(DateTime), default(DateTime) },
             { typeof(DateTimeOffset), default(DateTimeOffset) },
+            { typeof(char), default(char) },
+            { typeof(int), default(int) },
+            { typeof(uint), default(uint) },
             { typeof(long), default(long) },
+            { typeof(ulong), default(ulong) },
+            { typeof(short), default(short) },
+            { typeof(ushort), default(ushort) },
+            { typeof(byte), default(byte) },
+            { typeof(sbyte), default(sbyte) },
             { typeof(bool), default(bool) },
             { typeof(double), default(double) },
-            { typeof(short), default(short) },
             { typeof(float), default(float) },
-            { typeof(byte), default(byte) },
-            { typeof(char), default(char) },
-            { typeof(uint), default(uint) },
-            { typeof(ushort), default(ushort) },
-            { typeof(ulong), default(ulong) },
-            { typeof(sbyte), default(sbyte) }
         };
     }
 }

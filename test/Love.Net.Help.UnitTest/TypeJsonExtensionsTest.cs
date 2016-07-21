@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using Xunit;
 
@@ -21,6 +22,24 @@ namespace Love.Net.Help.UnitTest {
     public class User {
         public string UserName { get; set; }
         public string Password { get; set; }
+    }
+
+    public class Agenda {
+        /// <summary>
+        /// Gets or sets the template identifier.
+        /// </summary>
+        /// <value>The template identifier.</value>
+        public int TemplateId { get; set; }
+        /// <summary>
+        /// Gets or sets the users.
+        /// </summary>
+        /// <value>The users.</value>
+        public IList<int> Users { get; set; }
+        /// <summary>
+        /// Gets or sets the items.
+        /// </summary>
+        /// <value>The items.</value>
+        public IList<TimeSpan> Items { get; set; }
     }
 
     public class TypeJsonExtensionsTest {
@@ -60,6 +79,16 @@ namespace Love.Net.Help.UnitTest {
             var json = type.Schema();
 
             var expected = File.ReadAllText(".\\NestedSchema.json");
+
+            Assert.Equal(expected, json.ToString());
+        }
+
+        [Fact]
+        public void Class_TimeSpan_Prop_Schema_Default_Value_Test() {
+            var type = typeof(Agenda);
+            var json = type.Schema();
+
+            var expected = File.ReadAllText(".\\TimeSpan.json");
 
             Assert.Equal(expected, json.ToString());
         }
