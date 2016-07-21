@@ -8,7 +8,23 @@ A generate API documentation toolchain for ASP.NET Core.
 - [x] Read XML comments at run time;
 - [x] Get **Enum** raw constant value and XML comments;
 
-    e.g.
+    ```C#
+    public enum Gender {
+        /// <summary>
+        /// 未知.
+        /// </summary>
+        Unknown,
+        /// <summary>
+        /// 男性.
+        /// </summary>
+        Male,
+        /// <summary>
+        /// 女性.
+        /// </summary>
+        Female,
+    }
+    ```
+
     ```JSON
     {
       "0": "未知", 
