@@ -4,6 +4,19 @@ A generate API documentation toolchain for ASP.NET Core.
 
 [![Join the chat at https://gitter.im/lovedotnet/Love.Net.Help](https://badges.gitter.im/lovedotnet/Love.Net.Help.svg)](https://gitter.im/lovedotnet/Love.Net.Help?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 
+# Features
+[x] Read XML comments at run time;
+[x] Get **Enum** raw constant value and XML comments;
+    e.g.
+    ```JSON
+    {
+      "0": "未知", 
+      "1": "男性", 
+      "2": "女性"
+    }
+    ```
+[x]  Generate API documentation for ASP.NET Core.
+
 # Overview
 
 If your Chrome had installed `JSON-handle` extension, visit `http://localhost:10571/api/help`, the result will be:
@@ -60,7 +73,7 @@ Browser `http://localhost:10571/api/help/ui`
                     options.ContractResolver = new DefaultContractResolver();
                 }).AddApiHelp(options => {
                     options.IgnoreObsoleteApi = true;
-                    options.LoadingPolicy = LoadingPolicy.Lazy;
+                    options.LoadingPolicy = LoadingPolicy.Eager;
                 });
 
             services.UseDefaultAccountService<User>(null);
