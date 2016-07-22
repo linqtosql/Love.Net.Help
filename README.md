@@ -33,6 +33,7 @@ A generate API documentation toolchain for ASP.NET Core.
     }
     ```
 - [x] Generate API documentation for ASP.NET Core.
+- [x] JsonOutputFormatter use camel case or not determined by the API.
 - [x] More...
 
 # Overview
