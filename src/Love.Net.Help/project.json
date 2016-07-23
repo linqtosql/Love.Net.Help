@@ -5,18 +5,18 @@
   "packOptions": {
     "summary": "The generate API documentation infrastructure for Asp.Net Core - a API toolchain for ASP.NET Core.",
     "tags": [
+      "aspnetcore",
       "documentation",
-      "discovery",
       "help",
+      "discovery",
       "webapi",
-      "aspnet",
-      "aspnetcore"
+      "aspnet"
     ],
     "owners": [
       "rigofunc",
       "rigofunc@outlook.com"
     ],
-    "releaseNotes": "Separate UI to Love.Net.Help.UI package. This is a breaking change.",
+    "releaseNotes": "Separate UI to Love.Net.Help.UI, Love.Net.Help.JsonH and Love.Net.Help.JsonEditor packages. This is a breaking change.",
     "licenseUrl": "https://github.com/lovedotnet/Love.Net.Help/LICENSE",
     "projectUrl": "https://github.com/lovedotnet/Love.Net.Help",
     "repository": {

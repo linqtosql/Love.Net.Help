@@ -3,7 +3,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace Love.Net.Help.UI {
+namespace Love.Net.Help.JsonH {
     public class IndexPageStreamFactory : IInedexPageStreamFactory {
         private readonly Assembly _resourceAssembly;
         private readonly string _indexResourceName;

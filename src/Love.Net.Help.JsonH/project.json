@@ -1,16 +1,18 @@
 ﻿{
   "version": "1.0.0-*",
-  "description": "A swagger style UI for Love.Net.Help - a API toolchain for ASP.NET Core.",
+  "description": "Use JSON-handle as UI for Love.Net.Help - a API toolchain for ASP.NET Core.",
   "authors": [ "rigofunc", "rigofunc@outlook.com", "xuyingting" ],
   "packOptions": {
-    "summary": "A swagger style UI for Love.Net.Help - a API toolchain for ASP.NET Core.",
+    "summary": "Use JSON-handle as UI for Love.Net.Help - a API toolchain for ASP.NET Core.",
     "tags": [
       "aspnetcore",
+      "documentation",
       "help",
       "discovery",
-      "documentation",
       "webapi",
-      "aspnet"
+      "aspnet",
+      "json-handle",
+      "jsonhandle"
     ],
     "owners": [
       "rigofunc",
@@ -32,10 +34,7 @@
     "warningsAsErrors": true,
     "embed": {
       "include": [
-        "UI/dist/**/*.*"
-      ],
-      "exclude": [
-        "UI/dist/**/*.map"
+        "UI/**/*.*"
       ]
     }
   },
