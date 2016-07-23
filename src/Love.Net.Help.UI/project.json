@@ -1,9 +1,8 @@
 ﻿{
   "version": "1.0.0-*",
-  "description": "The generate API documentation infrastructure for Asp.Net Core - a API toolchain for ASP.NET Core.",
   "authors": [ "rigofunc", "rigofunc@outlook.com", "xuyingting" ],
   "packOptions": {
-    "summary": "The generate API documentation infrastructure for Asp.Net Core - a API toolchain for ASP.NET Core.",
+    "summary": "A swagger style UI for Love.Net.Help - a API toolchain for ASP.NET Core.",
     "tags": [
       "documentation",
       "discovery",
@@ -16,7 +15,6 @@
       "rigofunc",
       "rigofunc@outlook.com"
     ],
-    "releaseNotes": "Separate UI to Love.Net.Help.UI package. This is a breaking change.",
     "licenseUrl": "https://github.com/lovedotnet/Love.Net.Help/LICENSE",
     "projectUrl": "https://github.com/lovedotnet/Love.Net.Help",
     "repository": {
@@ -30,14 +28,21 @@
       "CS1591"
     ],
     "xmlDoc": true,
-    "warningsAsErrors": true
+    "warningsAsErrors": true,
+    "embed": {
+      "include": [
+        "UI/dist/**/*.*"
+      ],
+      "exclude": [
+        "UI/dist/**/*.map"
+      ]
+    }
   },
   "dependencies": {
     "NETStandard.Library": "1.6.0",
-    "Microsoft.AspNetCore.Mvc.Core": "1.0.0",
-    "Microsoft.AspNetCore.Mvc.ApiExplorer": "1.0.0",
-    "System.Xml.XPath.XDocument": "4.0.1",
-    "Newtonsoft.Json": "9.0.1"
+    "Microsoft.AspNetCore.StaticFiles": "1.0.0",
+    "Microsoft.Extensions.FileProviders.Embedded": "1.0.0",
+    "Love.Net.Help": "1.0.0-*"
   },
 
   "frameworks": {
