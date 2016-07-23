@@ -1,0 +1,52 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "Use Json Editor as UI for Love.Net.Help - a API toolchain for ASP.NET Core.",
+  "authors": [ "rigofunc", "rigofunc@outlook.com", "xuyingting" ],
+  "packOptions": {
+    "summary": "Use Json Editor as UI for Love.Net.Help - a API toolchain for ASP.NET Core.",
+    "tags": [
+      "aspnetcore",
+      "documentation",
+      "help",
+      "discovery",
+      "webapi",
+      "aspnet",
+      "jsoneditor",
+      "json-editor"
+    ],
+    "owners": [
+      "rigofunc",
+      "rigofunc@outlook.com"
+    ],
+    "licenseUrl": "https://github.com/lovedotnet/Love.Net.Help/LICENSE",
+    "projectUrl": "https://github.com/lovedotnet/Love.Net.Help",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/lovedotnet/Love.Net.Help.git"
+    }
+  },
+  "buildOptions": {
+    "optimize": true,
+    "nowarn": [
+      "CS1591"
+    ],
+    "xmlDoc": true,
+    "warningsAsErrors": true,
+    "embed": {
+      "include": [
+        "UI/**/*.*"
+      ]
+    }
+  },
+  "dependencies": {
+    "NETStandard.Library": "1.6.0",
+    "Microsoft.AspNetCore.StaticFiles": "1.0.0",
+    "Microsoft.Extensions.FileProviders.Embedded": "1.0.0",
+    "Love.Net.Help": "1.0.0-*"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+    }
+  }
+}

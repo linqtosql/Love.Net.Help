@@ -2,7 +2,7 @@
 
 using System.Reflection;
 using Love.Net.Help;
-using Love.Net.Help.JsonH;
+using Love.Net.Help.JsonEditor;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.FileProviders;
 
@@ -12,7 +12,7 @@ namespace Microsoft.AspNetCore.Builder {
             baseRoute = baseRoute.Trim('/');
             var indexPath = baseRoute + "/index.html";
 
-            var indexStreamFactory = new IndexPageStreamFactory("Love.Net.Help.JsonH.UI.index.html");
+            var indexStreamFactory = new IndexPageStreamFactory("Love.Net.Help.JsonEditor.UI.index.html");
 
             // Enable redirect from base path ton index path.
             app.UseMiddleware<RedirectMiddleware>(baseRoute, indexPath);
@@ -29,7 +29,7 @@ namespace Microsoft.AspNetCore.Builder {
             // Debug view the embed files
             //var embedFiles = typeof(ApiHelpUIBuilderExtensions).GetTypeInfo().Assembly.GetManifestResourceNames();
 
-            options.FileProvider = new EmbeddedFileProvider(typeof(ApiHelpUIBuilderExtensions).GetTypeInfo().Assembly, "Love.Net.Help.JsonH.UI");
+            options.FileProvider = new EmbeddedFileProvider(typeof(ApiHelpUIBuilderExtensions).GetTypeInfo().Assembly, "Love.Net.Help.JsonEditor.UI");
 
             app.UseFileServer(options);
 
